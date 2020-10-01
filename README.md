@@ -7,8 +7,6 @@ SO THAT I can manage my time effectively
 
 ACCEPTANCE CRITERIA
 GIVEN I am using a daily planner to create a schedule
-WHEN I open the planner
-THEN the current day is displayed at the top of the calendar
 WHEN I scroll down
 THEN I am presented with time blocks for standard business hours
 WHEN I view the time blocks for that day
@@ -21,7 +19,7 @@ WHEN I refresh the page
 THEN the saved events persist
 
 ## PURPOSE
-This calendar application runs in the browser and allows users to save events for each hour of the day.
+This calendar application runs in the browser and allows users to save events for each hour of the work day.
 
 ## Screenshot- CHANGE IMAGE
 <img src="./mock-up.png" alt="screenshot of calendar application">
@@ -35,4 +33,4 @@ This calendar application runs in the browser and allows users to save events fo
 https://smkrizan.github.io/day-planner/
 
 ### CONTRIBUTION
-Made with ☕+❤️ by Sara Krizan and in consultation with and the support of several LAs, TA, learning instructor and classmates through the University of Wisconsin Extended Campus Coding Bootcamp.
+Made with ☕+❤️ by Sara Krizan and in consultation with several LAs, TA, learning instructor and classmates through the University of Wisconsin Extended Campus Coding Bootcamp.
