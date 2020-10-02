@@ -1,3 +1,6 @@
+// variable to hold array of schedule entries
+var schedule = [];
+
 // get today's date & place at top of page
 var today = moment().format("dddd, MMMM Do YYYY");
 var displayDate = function () {
@@ -5,22 +8,17 @@ var displayDate = function () {
 }
 displayDate()
 
-var createSched = function (savedText, savedId) {
-    // match id of each saved array with id of .row selector
-
-    // updated textarea to savedText based on the outcome of above 
-
-
-}
-
 // load schedule from local storage and parse into array
 var loadSched = function () {
     schedule = JSON.parse(localStorage.getItem("schedule"));
     console.log(schedule)
 
     for (var i=0; i<schedule.length; i++) {
-        $("id").textContent(text)
+        var savedId = "'#" + schedule[i].id + "'";
+        var savedText = schedule[i].text;
+        $(savedId).val(savedText)
     }
+    console.log($(savedId).val(savedText))
 
     // if nothing has been saved to local storage, create a new object to track schedule entries
     if (!schedule) {
@@ -31,10 +29,7 @@ var loadSched = function () {
     }
 
 }
-
-// variable to hold array of schedule entries
-var schedule = [];
-
+loadSched()
 
 // save schedule entries to local storage
 var saveSched = function () {
@@ -45,7 +40,6 @@ var saveSched = function () {
 saveEntry = $(".saveBtn").on("click", function () {
     saveSched()
 })
-
 
 // delegating to parent div element for child textarea element
 $(".form-group").on("blur", "textarea", function () {
