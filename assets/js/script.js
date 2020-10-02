@@ -60,7 +60,6 @@ $(".form-group").on("blur", "textarea", function () {
     saveSched()
 });
 
-
 // update schedule to show status of entries
 var auditSched = function () {
     // determine current time
