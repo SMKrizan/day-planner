@@ -1,5 +1,5 @@
 // variable to hold array of schedule entries
-var schedule = [];
+// var schedule = [];
 
 // get today's date & place at top of page
 var today = moment().format("dddd, MMMM Do YYYY");
@@ -13,13 +13,6 @@ var loadSched = function () {
     schedule = JSON.parse(localStorage.getItem("schedule"));
     console.log(schedule)
 
-    for (var i=0; i<schedule.length; i++) {
-        var savedId = "'#" + schedule[i].id + "'";
-        var savedText = schedule[i].text;
-        $(savedId).val(savedText)
-    }
-    console.log($(savedId).val(savedText))
-
     // if nothing has been saved to local storage, create a new object to track schedule entries
     if (!schedule) {
         schedule = {
@@ -27,6 +20,15 @@ var loadSched = function () {
             id: [],
         };
     }
+    
+    for (var i=0; i<schedule.length; i++) {
+        var savedId = "'#" + schedule[i].id + "'";
+        var savedText = schedule[i].text;
+        $(savedId).val(savedText)
+    }
+    console.log(schedule.text)
+    console.log(schedule.id)
+    console.log($(savedId).val(savedText))
 
 }
 loadSched()
@@ -54,11 +56,13 @@ $(".form-group").on("blur", "textarea", function () {
     
     // push entry as an array to 'schedule'
     schedule.push({
-        text: schedEntry,
-        id: hourEntry,
+        "text": "schedEntry",
+        "id": "hourEntry",
     });
     saveSched()
 });
+
+// get the difference between current time
 
 // update schedule to show status of entries
 var auditSched = function () {
