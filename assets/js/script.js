@@ -15,20 +15,15 @@ var loadSched = function () {
 
     // if nothing has been saved to local storage, create a new object to track schedule entries
     if (!schedule) {
-        schedule = {
-            text: [],
-            id: [],
-        };
+        schedule = [];
     }
     
     for (var i=0; i<schedule.length; i++) {
-        var savedId = "'#" + schedule[i].id + "'";
-        var savedText = schedule[i].text;
-        $(savedId).val(savedText)
+        $("schedule[i].id").val(schedule[i].text);
     }
-    console.log(schedule.text)
-    console.log(schedule.id)
-    console.log($(savedId).val(savedText))
+    console.log(schedule[i].id)
+    console.log(schedule[i].text)
+    console.log($("schedule[i].id").val("schedule[i].text"))
 
 }
 loadSched()
@@ -57,10 +52,12 @@ $(".form-group").on("blur", "textarea", function () {
     schedEntry = {
         text: textEntry,
         hour: hourEntry,
-    }
+    };
+    console.log(schedEntry)
     
     // push entry as an array to 'schedule'
-    schedule.push(schedEntry);
+    schedule.push([schedEntry]);
+    console.log(schedule)
     saveSched()
 });
 
