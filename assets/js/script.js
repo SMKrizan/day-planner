@@ -1,5 +1,5 @@
 // variable to hold array of schedule entries
-// var schedule = [];
+var schedule = [];
 
 // get today's date & place at top of page
 var today = moment().format("dddd, MMMM Do YYYY");
@@ -46,19 +46,21 @@ saveEntry = $(".saveBtn").on("click", function () {
 // delegating to parent div element for child textarea element
 $(".form-group").on("blur", "textarea", function () {
     // get textarea's current value/text and remove leading/trailing whitespace
-    var schedEntry = $(this).val().trim();
-    console.log(schedEntry)
+    var textEntry = $(this).val().trim();
+    console.log(textEntry)
 
     // get the schedule entry position in the list of other entries
     var hourEntry = $(this)
         .attr("id")
     console.log(hourEntry)
+
+    schedEntry = {
+        text: textEntry,
+        hour: hourEntry,
+    }
     
     // push entry as an array to 'schedule'
-    schedule.push({
-        "text": "schedEntry",
-        "id": "hourEntry",
-    });
+    schedule.push(schedEntry);
     saveSched()
 });
 
