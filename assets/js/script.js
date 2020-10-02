@@ -1,14 +1,20 @@
-// GLOBAL VARIABLES
-// variable to hold array of schedule entries
-var schedule = {};
-// get today's date
+// get today's date & place at top of page
 var today = moment().format("dddd, MMMM Do YYYY");
-
-// place the day/date at top of page
 var displayDate = function () {
     $("#currentDay").text(today);
 }
 displayDate()
+
+// variable to hold array of schedule entries
+var schedule = [];
+
+var createSched = function (savedText, savedId) {
+    // saved schedule entry text should be placed in the textarea associated with its index upon loading the page
+    $("#schedule-entry") = 
+
+    schedule[index].text = text;
+  saveSched();
+}
 
 // load schedule from local storage and parse into array
 var loadSched = function () {
@@ -18,17 +24,15 @@ var loadSched = function () {
     if (!schedule) {
         schedule = {
             text: [],
-            time: [],
             id: [],
         };
     }
 
-    // loop through entry-object properties
+    // loop through entry objects
     $.each(schedule, function (list, arr) {
-        createEntry(schedule.text, schedule.time, schedule.id);
+        createSched(schedule.text, schedule.id);
     });
 }
-loadSched()
 
 // save schedule entries to local storage
 var saveSched = function () {
@@ -47,31 +51,24 @@ $(".form-group").on("blur", "textarea", function () {
     var schedEntry = $(this).val().trim();
     console.log(schedEntry)
 
-    // get the parent row div's id attribute
-    var rowId = $(this)
-        .closest(".row")
-        .attr("id");
-    console.log(rowId)
-
     // get the schedule entry position in the list of other entries
     var index = $(this)
         .closest(".row")
-        .index()
+        .index();
     console.log(index)
-
-    // push entry as an array to the object 'schedule'
+    
+    // push entry as an array to 'schedule'
     schedule.push({
         text: schedEntry,
-        time: rowId,
         id: index,
     });
-})
-saveSched();
+    saveSched()
+});
+
 
 // update schedule to show status of entries
 var auditSched = function () {
     // determine current time
     var timeNow = moment();
     console.log(timeNow)
-
 }
