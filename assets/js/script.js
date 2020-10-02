@@ -5,20 +5,22 @@ var displayDate = function () {
 }
 displayDate()
 
-// variable to hold array of schedule entries
-var schedule = [];
-
 var createSched = function (savedText, savedId) {
-    // saved schedule entry text should be placed in the textarea associated with its index upon loading the page
-    $("#schedule-entry") = 
+    // match id of each saved array with id of .row selector
 
-    schedule[index].text = text;
-  saveSched();
+    // updated textarea to savedText based on the outcome of above 
+
+
 }
 
 // load schedule from local storage and parse into array
 var loadSched = function () {
     schedule = JSON.parse(localStorage.getItem("schedule"));
+    console.log(schedule)
+
+    for (var i=0; i<schedule.length; i++) {
+        $("id").textContent(text)
+    }
 
     // if nothing has been saved to local storage, create a new object to track schedule entries
     if (!schedule) {
@@ -28,11 +30,11 @@ var loadSched = function () {
         };
     }
 
-    // loop through entry objects
-    $.each(schedule, function (list, arr) {
-        createSched(schedule.text, schedule.id);
-    });
 }
+
+// variable to hold array of schedule entries
+var schedule = [];
+
 
 // save schedule entries to local storage
 var saveSched = function () {
@@ -41,9 +43,9 @@ var saveSched = function () {
 
 // click event listener for save buttons
 saveEntry = $(".saveBtn").on("click", function () {
+    saveSched()
 })
-console.log(saveEntry)
-saveSched()
+
 
 // delegating to parent div element for child textarea element
 $(".form-group").on("blur", "textarea", function () {
@@ -52,15 +54,14 @@ $(".form-group").on("blur", "textarea", function () {
     console.log(schedEntry)
 
     // get the schedule entry position in the list of other entries
-    var index = $(this)
-        .closest(".row")
-        .index();
-    console.log(index)
+    var hourEntry = $(this)
+        .attr("id")
+    console.log(hourEntry)
     
     // push entry as an array to 'schedule'
     schedule.push({
         text: schedEntry,
-        id: index,
+        id: hourEntry,
     });
     saveSched()
 });
