@@ -10,23 +10,34 @@ displayDate()
 
 // load schedule from local storage and parse into array
 var loadSched = function () {
-    schedule = JSON.parse(localStorage.getItem("schedule"));
-    console.log(schedule)
+    var savedSched = localStorage.getItem("schedule");
 
-    // if nothing has been saved to local storage, create a new object to track schedule entries
-    if (!schedule) {
-        schedule = [];
+    // if nothing has been saved to local storage, discontinue function
+    if (!savedSched) {
+        return false
     }
+
+    // parse string back into an array of objects
+    savedSched = JSON.parse(savedSched);
+    console.log(savedSched)
     
-    for (var i=0; i<schedule.length; i++) {
-        $("schedule[i].id").val(schedule[i].text);
+    // loop through each saved schedule entry to place text within schedule
+    for (var i=0; i<savedSched.length; i++) {
+        console.log(savedSched[i].text)
+        var textEntry = savedSched[i].text;
+        console.log(savedSched[i].hour)
+        var hourEntry = "#" + savedSched[i].hour;
+        console.log(hourEntry)
+        console.log(textEntry)
+        $("hourEntry").val("textEntry");
+        console.log($("hourEntry").val("textEntry"))
     }
-    console.log(schedule[i].id)
-    console.log(schedule[i].text)
-    console.log($("schedule[i].id").val("schedule[i].text"))
-
 }
 loadSched()
+
+var updateEntries = function (savedSched) {
+
+}
 
 // save schedule entries to local storage
 var saveSched = function () {
@@ -56,16 +67,23 @@ $(".form-group").on("blur", "textarea", function () {
     console.log(schedEntry)
     
     // push entry as an array to 'schedule'
-    schedule.push([schedEntry]);
+    schedule.push(schedEntry);
     console.log(schedule)
     saveSched()
 });
 
-// get the difference between current time
+// // audit schedule entries with reference to current time
+// auditSched = function {
+//     // establish current time
+//     var timeNow = moment();
+//     console.log(timeNow)
 
-// update schedule to show status of entries
-var auditSched = function () {
-    // determine current time
-    var timeNow = moment();
-    console.log(timeNow)
-}
+
+//     // get time from schedule entry
+//     var 
+//     // calculate difference between time of entry and current time
+
+//     // remove any old classes from associated schedule entry
+
+//     // apply new class if needed
+// }
