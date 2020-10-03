@@ -10,34 +10,24 @@ displayDate()
 
 // load schedule from local storage and parse into array
 var loadSched = function () {
-    var savedSched = localStorage.getItem("schedule");
+    schedule = localStorage.getItem("schedule");
 
     // if nothing has been saved to local storage, discontinue function
-    if (!savedSched) {
+    if (!schedule) {
         return false
     }
 
     // parse string back into an array of objects
-    savedSched = JSON.parse(savedSched);
-    console.log(savedSched)
-    
+    schedule = JSON.parse(schedule);
+
     // loop through each saved schedule entry to place text within schedule
-    for (var i=0; i<savedSched.length; i++) {
-        console.log(savedSched[i].text)
-        var textEntry = savedSched[i].text;
-        console.log(savedSched[i].hour)
-        var hourEntry = "#" + savedSched[i].hour;
-        console.log(hourEntry)
-        console.log(textEntry)
-        $("hourEntry").val("textEntry");
-        console.log($("hourEntry").val("textEntry"))
+    for (var i = 0; i < schedule.length; i++) {
+        var textEntry = schedule[i].text;
+        var hourEntry = "#" + schedule[i].hour
+        $(hourEntry).val(textEntry);
     }
 }
 loadSched()
-
-var updateEntries = function (savedSched) {
-
-}
 
 // save schedule entries to local storage
 var saveSched = function () {
@@ -53,37 +43,76 @@ saveEntry = $(".saveBtn").on("click", function () {
 $(".form-group").on("blur", "textarea", function () {
     // get textarea's current value/text and remove leading/trailing whitespace
     var textEntry = $(this).val().trim();
-    console.log(textEntry)
 
     // get the schedule entry position in the list of other entries
     var hourEntry = $(this)
         .attr("id")
-    console.log(hourEntry)
 
     schedEntry = {
         text: textEntry,
         hour: hourEntry,
     };
-    console.log(schedEntry)
-    
+
     // push entry as an array to 'schedule'
     schedule.push(schedEntry);
-    console.log(schedule)
     saveSched()
 });
 
+// audit schedule entries with reference to current time
+var auditSched = function () {
+    // establish current time
+    currentHour = parseInt(moment().format("H"));
+    minutesNow = parseInt(moment().format("m"));
+    // if (minutesNow > 30) {
+    //     currentHour = currentHour + 1;
+    // }
+    // console.log(currentHour)
+
+    // get time from schedule for comparison
+    var sched = $(".hour");
+
+    // calculate difference between schedule entries and current time; my TA helped me to define the string literanl enabling this solution to the problem
+    for (i=7; i<19; i++) {
+        if (currentHour > i) {
+            $(`.t${i}`).addClass("past");
+        }
+        else if (currentHour == i) {
+            $(`.t${i}`).addClass("present");
+        }
+        else if (currentHour < i) {
+            $(`.t${i}`).addClass("future");
+        }
+    };
+}
+auditSched()
+
+// // calculate difference between schedule entries and current time; this is the code I would prefer to use but could not get it to work. Nevertheless - not ready to dispose of it.
 // // audit schedule entries with reference to current time
-// auditSched = function {
+// var auditSched = function () {
 //     // establish current time
-//     var timeNow = moment();
-//     console.log(timeNow)
+//     currentHour = parseInt(moment().format("H"));
+//     minutesNow = parseInt(moment().format("m"));
+//     // if (minutesNow > 30) {
+//     //     currentHour = currentHour + 1;
+//     // console.log(currentHour)
+    // get time from schedule for comparison
+    // var sched = $(".hour");
+    // $.each(sched, function () {
+    //     var schedHour = $(this).attr("id").substring(1);
+    //     schedHour = parseInt(schedHour);
+    //     // console.log($(this).attr("id"))
+    //     console.log($(this).attr("id").substring(1))
 
-
-//     // get time from schedule entry
-//     var 
-//     // calculate difference between time of entry and current time
-
-//     // remove any old classes from associated schedule entry
-
-//     // apply new class if needed
-// }
+    //     // change classes to affect color-coding
+    //     console.log(currentHour)
+    //     console.log(schedHour)
+    //     if (currentHour > schedHour) {
+    //         $(".row").addClass("past");
+    //     }
+    //     else if (currentHour == schedHour) {
+    //         $(".row").addClass("present");
+    //     }
+    //     else if (currentHour < schedHour) {
+    //         $(".row").addClass("future");
+    //     }
+    // });
